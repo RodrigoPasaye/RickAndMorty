@@ -43,6 +43,6 @@ export default {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 3rem;
-  margin: 3rem 0;
+  margin: 3rem 4rem;
 }
 </style>
