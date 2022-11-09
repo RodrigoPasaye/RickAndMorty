@@ -3,6 +3,7 @@
     <h1>Rick and Morty</h1>
     <FilterByStatus />
     <FilterByName />
+    <Pagination />
     <ListCharacters />
   </div>
 </template>
@@ -10,6 +11,7 @@
 <script>
 import FilterByStatus from "@/components/FilterByStatus.vue";
 import FilterByName from "@/components/FilterByName.vue";
+import Pagination from "@/components/Pagination.vue";
 import ListCharacters from "@/components/ListCharacters.vue";
 
 export default {
@@ -17,6 +19,7 @@ export default {
   components: {
     ListCharacters,
     FilterByStatus,
+    Pagination,
     FilterByName,
   },
 };
