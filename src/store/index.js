@@ -3,7 +3,9 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     characters: [],
-    charactersFilter: []
+    charactersFilter: [],
+    prevPage: "",
+    nextPage: ""
   },
   mutations: {
     setCharacters(state, payload) {
@@ -12,6 +14,12 @@ export default createStore({
     setCharactersFilter(state, payload) {
       state.charactersFilter = payload
     },
+    setPrevPage(state, payload) {
+      state.prevPage = payload
+    },
+    setNextPage(state, payload) {
+      state.nextPage = payload
+    }
   },
   actions: {
     async getCharacters({commit}) {
@@ -20,6 +28,8 @@ export default createStore({
         const data = await response.json()
         commit('setCharacters', data.results)
         commit('setCharactersFilter', data.results)
+        commit('setPrevPage', data.info.prev)
+        commit('setNextPage', data.info.next)
       } catch (error) {
         console.error(error)
       }
@@ -39,7 +49,31 @@ export default createStore({
         }
       })
       commit('setCharactersFilter', results)
-    }
+    },
+    async getPrevPage({commit, state}) {
+      try {
+        const response = await fetch(state.prevPage)
+        const data = await response.json()
+        commit('setCharacters', data.results)
+        commit('setCharactersFilter', data.results)
+        commit('setPrevPage', data.info.prev)
+        commit('setNextPage', data.info.next)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async getNextPage({commit, state}) {
+      try {
+        const response = await fetch(state.nextPage)
+        const data = await response.json()
+        commit('setCharacters', data.results)
+        commit('setCharactersFilter', data.results)
+        commit('setPrevPage', data.info.prev)
+        commit('setNextPage', data.info.next)
+      } catch (error) {
+        console.error(error)
+      }
+    },
   },
   modules: {
   }
